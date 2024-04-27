@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={GeistSans.className}>{children}</body>
+        <body className={`${GeistSans.className} h-dvh`}>{children}</body>
       </html>
     </ClerkProvider>
   );
