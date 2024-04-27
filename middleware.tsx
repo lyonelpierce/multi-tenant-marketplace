@@ -142,12 +142,9 @@ export default clerkMiddleware((auth, req) => {
   }
 
   // Rewrite app to /home
-  // if (
-  //   hostname.includes("localhost") ||
-  //   process.env.NEXT_PUBLIC_ROOT_DOMAIN === hostname
-  // ) {
-  //   return NextResponse.rewrite(new URL(`/home`, req.url));
-  // }
+  if (process.env.NEXT_PUBLIC_ROOT_DOMAIN === hostname) {
+    return NextResponse.rewrite(new URL(`/home`, req.url));
+  }
 
   // Rewrite everything else to `/[domain]/[slug] dynamic route
   return NextResponse.rewrite(new URL(`/${hostname}${path}`, req.url));
