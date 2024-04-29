@@ -23,10 +23,8 @@ export default clerkMiddleware((auth, req) => {
   // Get HostName
   let hostname = req.headers
     .get("host")!
-    .replace(
-      `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`,
-      `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`
-    );
+    .replace(".localhost:3000", `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
+  console.log(hostname);
 
   // Get Pathname
   const searchParams = req.nextUrl.searchParams.toString();
