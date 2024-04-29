@@ -26,6 +26,8 @@ export default clerkMiddleware((auth, req) => {
     .replace(".localhost:3000", `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
   console.log(hostname);
 
+  hostname = hostname.replace("www.", "");
+
   // Get Pathname
   const searchParams = req.nextUrl.searchParams.toString();
   // Get the pathname of the request (e.g. /, /about, /blog/first-post)
@@ -34,7 +36,10 @@ export default clerkMiddleware((auth, req) => {
   }`;
 
   // If landing route
-  if (hostname === process.env.NEXT_PUBLIC_ROOT_DOMAIN) {
+  if (
+    hostname === "localhost:3000" ||
+    hostname === process.env.NEXT_PUBLIC_ROOT_DOMAIN
+  ) {
     return NextResponse.rewrite(
       new URL(`${path === "/" ? "" : path}`, req.url)
     );
