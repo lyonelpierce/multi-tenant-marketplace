@@ -12,8 +12,9 @@ const LandingNavbar = () => {
     <div className="bg-zinc-900 h-20 flex items-center text-white">
       <WidthWrapper className="flex justify-between">
         <Link href="/">
-          <h1 className="uppercase font-light text-2xl">
-            Tienda<span className="font-bold text-yellow-400">EC</span>
+          <h1 className="uppercase font-light text-2xl flex ">
+            Panda
+            <span className="text-xs font-bold text-yellow-400">EC</span>
           </h1>
         </Link>
         <div className="flex gap-10">
