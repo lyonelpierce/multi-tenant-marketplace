@@ -24,7 +24,7 @@ export default clerkMiddleware((auth, req) => {
   let hostname = req.headers
     .get("host")!
     .replace(".localhost:3000", `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
-  console.log(hostname);
+  console.log("[LYO]", hostname);
 
   hostname = hostname.replace("www.", "");
 
