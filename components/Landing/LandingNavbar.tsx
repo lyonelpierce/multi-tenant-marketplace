@@ -36,7 +36,7 @@ const LandingNavbar = () => {
         </ul>
         <div className="flex gap-6">
           <Tooltip>
-            <TooltipTrigger>
+            <TooltipTrigger asChild>
               <Button size="icon" variant="icon" className="hover:scale-110">
                 <HeartIcon className="w-6 h-6" />
               </Button>
@@ -56,7 +56,7 @@ const LandingNavbar = () => {
             <SignOutButton />
           )}
           <Tooltip>
-            <TooltipTrigger>
+            <TooltipTrigger asChild>
               <Button size="icon" variant="icon" className="hover:scale-110">
                 <ShoppingBag className="w-6 h-6" />
               </Button>
