@@ -1,10 +1,16 @@
+import Link from "next/link";
 import { auth } from "@clerk/nextjs/server";
 import { SignInButton, SignOutButton } from "@clerk/nextjs";
 
 import WidthWrapper from "@/components/WidthWrapper";
 import { HeartIcon, ShoppingBag, User } from "lucide-react";
-import Link from "next/link";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
+import { landingMenu } from "@/constants/landingMenu";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const LandingNavbar = () => {
   const { userId }: { userId: string | null } = auth();
@@ -18,22 +24,45 @@ const LandingNavbar = () => {
             <span className="text-xs font-regular text-yellow-400">EC</span>
           </h1>
         </Link>
-        <div className="flex gap-8">
-          <Button size="icon" variant="icon" className="hover:scale-110">
-            <HeartIcon />
-          </Button>
-          {!userId ? (
-            <SignInButton>
+        <ul className="font-semibold text-sm">
+          {landingMenu.map((item) => (
+            <li
+              key={item.title}
+              className="inline-block mx-4 transition-all ease-in-out hover:text-yellow-400"
+            >
+              <Link href={item.path}>{item.title}</Link>
+            </li>
+          ))}
+        </ul>
+        <div className="flex gap-6">
+          <Tooltip>
+            <TooltipTrigger>
               <Button size="icon" variant="icon" className="hover:scale-110">
-                <User />
+                <HeartIcon className="w-6 h-6" />
               </Button>
-            </SignInButton>
+            </TooltipTrigger>
+            <TooltipContent>Favoritos</TooltipContent>
+          </Tooltip>
+          {!userId ? (
+            <Tooltip>
+              <TooltipTrigger>
+                <SignInButton>
+                  <User className="w-6 h-6 transition-all ease-in-out hover:scale-110" />
+                </SignInButton>
+              </TooltipTrigger>
+              <TooltipContent>Mi Cuenta</TooltipContent>
+            </Tooltip>
           ) : (
             <SignOutButton />
           )}
-          <Button size="icon" variant="icon" className="hover:scale-110">
-            <ShoppingBag />
-          </Button>
+          <Tooltip>
+            <TooltipTrigger>
+              <Button size="icon" variant="icon" className="hover:scale-110">
+                <ShoppingBag className="w-6 h-6" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Carrito</TooltipContent>
+          </Tooltip>
         </div>
       </WidthWrapper>
     </div>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { GeistSans } from "geist/font/sans";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 export const metadata: Metadata = {
   title: {
@@ -18,9 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body className={`${GeistSans.className} h-dvh`}>{children}</body>
-      </html>
+      <TooltipProvider delayDuration={0} disableHoverableContent>
+        <html lang="en">
+          <body className={`${GeistSans.className} h-dvh`}>{children}</body>
+        </html>
+      </TooltipProvider>
     </ClerkProvider>
   );
 }
