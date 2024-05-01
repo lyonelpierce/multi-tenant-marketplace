@@ -9,13 +9,18 @@ datasource db {
 }
 
 model User {
-  id            String  @id @default(uuid())
-  sites         Site[]
+  id            String   @id @default(uuid())
+  store         Store[]
+  attributes    Json
+  firstName     String
+  lastName      String
+  email         String   @unique
+  cedula        String?  @unique
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
 
-model Site {
+model Store {
   id            String   @id @default(cuid())
   name          String?
   description   String?  @db.Text

@@ -3,12 +3,6 @@ import Link from "next/link";
 import WidthWrapper from "@/components/WidthWrapper";
 import { HeartIcon, ShoppingBag, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { landingMenu } from "@/constants/Landing/landingMenu";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import UserDropdown from "./UserDropdown";
 
 const LandingNavbar = () => {
@@ -21,16 +15,7 @@ const LandingNavbar = () => {
             <span className="text-xs font-regular text-yellow-400">EC</span>
           </h1>
         </Link>
-        <ul className="font-semibold text-sm">
-          {landingMenu.map((item) => (
-            <li
-              key={item.title}
-              className="inline-block mx-4 transition-all ease-in-out hover:text-yellow-400"
-            >
-              <Link href={item.path}>{item.title}</Link>
-            </li>
-          ))}
-        </ul>
+
         <ul className="flex items-center gap-8">
           <li>
             <Link href="/favorites">
@@ -44,10 +29,10 @@ const LandingNavbar = () => {
               <Button
                 size="icon"
                 variant="icon"
-                className="hover:scale-110"
+                className="hover:scale-110 cursor-pointer"
                 asChild
               >
-                <User className="w-6 h-6 transition-all ease-in-out hover:scale-110" />
+                <User className="w-6 h-6 transition-all ease-in-out hover:scale-110 mr-2" />
               </Button>
             </UserDropdown>
           </li>
