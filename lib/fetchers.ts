@@ -8,7 +8,7 @@ export async function getSiteData(domain: string) {
 
   return await unstable_cache(
     async () => {
-      const domainData = prismadb.site.findUnique({
+      const domainData = prismadb.store.findUnique({
         where: subdomain ? { subdomain } : { customDomain: domain },
         include: { user: true },
       });
