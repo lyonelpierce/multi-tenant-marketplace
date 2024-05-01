@@ -18,7 +18,7 @@ const UserDropdown = ({ children }: { children: React.ReactNode }) => {
       >
         <DropdownMenuItem
           asChild
-          className="w-full px-2 h-10 font-medium cursor-pointer"
+          className="w-full px-2 h-10 font-regular cursor-pointer"
         >
           <SignInButton>
             <div>
@@ -29,7 +29,7 @@ const UserDropdown = ({ children }: { children: React.ReactNode }) => {
         </DropdownMenuItem>
         <DropdownMenuItem
           asChild
-          className="w-full px-2 h-10 font-medium text-sm cursor-pointer"
+          className="w-full px-2 h-10 font-regular text-sm cursor-pointer"
         >
           <SignUpButton>
             <div>
