@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Search } from "lucide-react";
 
-import searchSchema from "@/constants/searchSchema";
+import searchSchema from "@/constants/Landing/searchSchema";
 
 const HeroSearch = () => {
   const searchForm = useForm<z.infer<typeof searchSchema>>({
