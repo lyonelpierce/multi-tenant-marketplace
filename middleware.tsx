@@ -1,6 +1,19 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
+export const config = {
+  matcher: [
+    /*
+     * Match all paths except for:
+     * 1. /api routes
+     * 2. /_next (Next.js internals)
+     * 3. /_static (inside /public)
+     * 4. all root files inside /public (e.g. /favicon.ico)
+     */
+    "/((?!api/|_next/|_static/|_vercel|[\\w-]+\\.\\w+).*)",
+  ],
+};
+
 const reservedSubdomains = [
   "clkmail",
   "clk2._domainkey",
@@ -24,7 +37,6 @@ export default clerkMiddleware((auth, req) => {
   let hostname = req.headers
     .get("host")!
     .replace(".localhost:3000", `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
-  console.log("[LYO]", hostname);
 
   hostname = hostname.replace("www.", "");
 
@@ -58,11 +70,3 @@ export default clerkMiddleware((auth, req) => {
   // Rewrite everything else to `/[domain]/[slug] dynamic route
   return NextResponse.rewrite(new URL(`/${hostname}${path}`, req.url));
 });
-
-export const config = {
-  matcher: [
-    "/((?!.*\\..*|_next).*)", // Don't run middleware on static files
-    "/", // Run middleware on index page
-    "/(api|trpc)(.*)",
-  ], // Run middleware on API routes
-};

@@ -1,3 +1,4 @@
+import prismadb from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs/server";
 import { SignInButton, SignOutButton, SignUpButton } from "@clerk/nextjs";
 
@@ -8,11 +9,27 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
 import { LogInIcon, LogOutIcon, UserPlusIcon } from "lucide-react";
 
-const UserDropdown = ({ children }: { children: React.ReactNode }) => {
-  const { userId } = auth();
+const getUserFirstName = async ({ userId }: { userId: string | null }) => {
+  if (!userId) return null;
+
+  try {
+    const response = await prismadb.user.findUnique({
+      where: { id: userId },
+      select: { firstName: true },
+    });
+
+    return response?.firstName;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const UserDropdown = async ({ children }: { children: React.ReactNode }) => {
+  const { userId }: { userId: string | null } = auth();
+
+  const firstName = await getUserFirstName({ userId });
 
   return (
     <DropdownMenu>
@@ -49,8 +66,8 @@ const UserDropdown = ({ children }: { children: React.ReactNode }) => {
           </>
         ) : (
           <>
-            <div className="p-2">
-              <p className="text-sm">Bienvenid@</p>
+            <div className="py-4 px-2">
+              <p className="text-xs font-medium">Bienvenid@ {firstName}</p>
             </div>
             <DropdownMenuSeparator />
             <DropdownMenuItem
