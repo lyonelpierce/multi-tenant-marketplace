@@ -55,7 +55,6 @@ export async function POST(req: Request) {
 
   if (eventType === "user.created" || eventType === "user.updated") {
     const { id, ...attributes } = evt.data;
-    const stringAttributes = JSON.stringify(attributes);
 
     await prismadb.user.upsert({
       where: { id: id as string },
@@ -64,9 +63,12 @@ export async function POST(req: Request) {
         firstName: attributes.first_name as string,
         lastName: attributes.last_name as string,
         email: attributes.email_addresses?.[0]?.email_address as string,
-        attributes: stringAttributes,
       },
-      update: { attributes: stringAttributes },
+      update: {
+        firstName: attributes.first_name as string,
+        lastName: attributes.last_name as string,
+        email: attributes.email_addresses?.[0]?.email_address as string,
+      },
     });
   }
 
