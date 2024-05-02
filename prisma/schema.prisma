@@ -13,6 +13,7 @@ model User {
   store         Store[]
   firstName     String
   lastName      String
+  role          String   @default("client")
   email         String   @unique
   cedula        String?  @unique
   createdAt     DateTime @default(now())

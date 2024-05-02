@@ -66,7 +66,7 @@ const UserDropdown = async ({ children }: { children: React.ReactNode }) => {
           </>
         ) : (
           <>
-            <div className="py-4 px-2">
+            <div className="pt-4 pb-3 px-2">
               <p className="text-xs font-medium">Bienvenid@ {firstName}</p>
             </div>
             <DropdownMenuSeparator />
